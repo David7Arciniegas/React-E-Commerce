@@ -29,7 +29,7 @@ const ProductsDetail = () => {
         
     }, [ dispatch, id])
    
-
+ 
     return (
 
 

@@ -30,7 +30,7 @@ const Home = () => {
     dispatch(filterCategory(id));
   }
 
-  console.log(products);
+
     
   return (
     <div>
