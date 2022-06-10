@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Card, Col, ListGroup, Row } from 'react-bootstrap';
+import { Button, Card, Col, ListGroup, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { addToCart } from '../store/slices/cart.slice';
 import { filterCategory } from '../store/slices/products.slice';
 
 
@@ -10,6 +11,7 @@ import { filterCategory } from '../store/slices/products.slice';
 const ProductsDetail = () => {
 
     const [ product, setProducts ] = useState({})
+    const [ quantity, setQuantity ] = useState("")
     const { id } = useParams();
     const products = useSelector(state => state.products);
     const dispatch = useDispatch();
@@ -28,6 +30,16 @@ const ProductsDetail = () => {
              });
         
     }, [ dispatch, id])
+
+    const addProduct = () => {
+      const item = {
+        id : Number(id),
+        quantity: Number(quantity)   
+      }
+      console.log(item)
+      dispatch(addToCart(item));
+    }
+   
    
  
     return (
@@ -36,10 +48,17 @@ const ProductsDetail = () => {
         <div>
                 <Card
                     style={{ cursor: "pointer" }}>
-                    <Card.Img variant="top" src={product.productImgs} className="fluid-img"/>
+                    <Card.Img variant="top" src={product.productImgs} className="image-fluid"/>
                     <Card.Body>
                       <Card.Title>{product.title}</Card.Title>
                       <Card.Text>{product.description}</Card.Text>
+                      <input
+                       onChange={e => setQuantity(e.target.value)}
+                       value={quantity} 
+                       type="number"
+                       placeholder='Quantity'
+                       />
+                      <Button onClick={addProduct}>Add to Cart</Button>
                     </Card.Body>
                   </Card>
 
