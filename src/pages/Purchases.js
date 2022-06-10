@@ -4,12 +4,15 @@ import { useNavigate } from "react-router-dom";
 import { getPurchases } from "../store/slices/purchases.slice";
 
 const Purchases = () => {
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const purchases = useSelector((state) => state.purchases);
-  
-  const options = { year: "numeric", month: "long", day: "numeric"};
-  const date = new Date(purchases[0]?.createdAt).toLocaleDateString("en-us", options);
 
   useEffect(() => {
     dispatch(getPurchases());
@@ -17,26 +20,33 @@ const Purchases = () => {
 
   return (
     <div>
-        <h1>Purchases</h1>
-      
+      <h1>Purchases</h1>
+
       <ul>
         {purchases.map((purchase) => (
-            <div>
-                <h4>{date}</h4>
-            <li  key={purchases[0].cart.products.title} onClick={() => navigate(`/products/${purchase.cart?.products[0].id}`)}>{purchase.cart?.products[0]?.title}
-                {purchase.cart.products.map((product) => ( 
-                    <div key={purchases[0].cart.products.description}>
-                        Quantity: {purchase.cart?.products[0]?.productsInCart.quantity}
-                        <div>
-                          Price: $ {purchase.cart?.products[0]?.price}
-                        </div>
-                    </div>
-                ))}
-                     
-            </li>
-            </div>
+          <div key={purchase.id}>
+            <h4>
+              Created:{" "}
+              {new Date(purchase.createdAt).toLocaleDateString(
+                "en-us",
+                options
+              )}
+            </h4>
+
+            {purchase.cart.products.map((product) => (
+              <li
+                key={product.id}
+                onClick={() => navigate(`/products/${product.id}`)}
+              >
+                {product.title}
+                <div key={product.id}>
+                  Quantity: {product.productsInCart.quantity}
+                  Price: $ {product.price}
+                </div>
+              </li>
+            ))}
+          </div>
         ))}
-            
       </ul>
     </div>
   );
