@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { ListGroup, Offcanvas } from "react-bootstrap";
+import { Button, ListGroup, Offcanvas } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getCart } from "../store/slices/cart.slice";
+import { buyProduct, getCart } from "../store/slices/cart.slice";
 import {useNavigate} from "react-router-dom"; 
 
 const CartSideBar = ({ show, handleClose }) => {
@@ -36,11 +36,11 @@ const CartSideBar = ({ show, handleClose }) => {
             {cartItems.map((cartItem) => (
               <ListGroup.Item onClick={() => selectCartItem(cartItem)}key={cartItem.id}>
                 <h2>{cartItem.title}</h2>
-                {cartItem.description}
                 <h3>Quantity: {cartItem.quantity}</h3>
                </ListGroup.Item>
 
             ))}
+            <Button onClick={() => dispatch(buyProduct())}>Checkout</Button>
           </ListGroup>
         </Offcanvas.Body>
       </Offcanvas>

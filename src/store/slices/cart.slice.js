@@ -3,6 +3,7 @@ import axios from 'axios';
 import { setIsLoading } from './isLoading.slice';
 import getConfig from "../../utils/getConfig";
 import { getProducts } from './products.slice';
+import { getPurchases } from './purchases.slice';
 
 export const cartSlice = createSlice({
     name: 'cart',
@@ -33,6 +34,18 @@ export const addToCart = (item) => (dispatch) => {
             })
         .catch(error => alert(error.response.data.message))
         .finally(() => dispatch(setIsLoading(false)));
+};
+
+
+
+export const buyProduct = () => (dispatch) => {
+    dispatch(setIsLoading(true));
+    return axios.post("https://ecommerce-api-react.herokuapp.com/api/v1/purchases", {}, getConfig())
+        .then(() => {
+            dispatch(getPurchases())
+            dispatch(setCart([]));
+          })
+         .finally(() => dispatch(setIsLoading(false)));
 };
 
 
