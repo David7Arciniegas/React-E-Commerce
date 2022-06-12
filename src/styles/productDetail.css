@@ -1,0 +1,12 @@
+
+
+.img-detail > img{
+    display: flex;
+    justify-content: center;
+    width: 30%;
+
+}
+
+.detail-container{
+    display: flex;
+}

@@ -32,7 +32,7 @@ export const addToCart = (item) => (dispatch) => {
             dispatch(getProducts());
             alert("Product added to cart!")
             })
-        .catch(error => alert(error.response.data.message))
+        .catch((error) => {dispatch(getProducts());alert(error.response.data.message)})
         .finally(() => dispatch(setIsLoading(false)));
 };
 

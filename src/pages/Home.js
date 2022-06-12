@@ -4,6 +4,7 @@ import { filterCategory, filterTitle, getProducts } from "../store/slices/produc
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Card, Col, FormControl, InputGroup, ListGroup, Row } from "react-bootstrap";
 import axios from "axios";
+import "../styles/home.css";
 
 
 const Home = () => {
@@ -34,7 +35,8 @@ const Home = () => {
     
   return (
     <div>
-      <h1>Home</h1>
+      
+      <h3 className="home-title">Categories</h3>
         <Row>
           <Col lg={3}>
             <ListGroup style={{ cursor: "pointer" }}>
@@ -52,8 +54,8 @@ const Home = () => {
           <Col>
             <InputGroup className="mb-3">
               <FormControl
-                placeholder="Recipient's username"
-                aria-label="Recipient's username"
+                placeholder="What are you looking for?"
+                aria-label="What are you looking for?"
                 aria-describedby="basic-addon2"
                 onChange={e => setSearch(e.target.value)}
                 value={search}
@@ -69,10 +71,14 @@ const Home = () => {
                     style={{ cursor: "pointer" }}
                     onClick={() => navigate(`/products/${productsItem.id}`)}
                   >
-                    <Card.Img variant="top" src={productsItem.productImgs[0]} />
+                    <div className="home-image">
+                    <Card.Img variant="top" src={productsItem.productImgs[0]} className="img-fluid"/>
+                    </div>
                     <Card.Body>
                       <Card.Title>{productsItem.title}</Card.Title>
-                      <Card.Text>{productsItem.description}</Card.Text>
+                      
+                      <Card.Text>Price: ${productsItem.price}</Card.Text>
+                      <Button >Add to Cart</Button>
                     </Card.Body>
                   </Card>
                 </Col>

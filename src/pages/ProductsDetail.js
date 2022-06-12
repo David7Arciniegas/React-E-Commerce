@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Col, ListGroup, Row } from 'react-bootstrap';
+import { Button, Card, Col,  Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { addToCart } from '../store/slices/cart.slice';
 import { filterCategory } from '../store/slices/products.slice';
+import "../styles/productDetail.css";
 
 
 
@@ -36,19 +37,19 @@ const ProductsDetail = () => {
         id : Number(id),
         quantity: Number(quantity)   
       }
-      console.log(item)
       dispatch(addToCart(item));
     }
    
-   
- 
     return (
 
-
         <div>
+
+          <div className='detail-container'>
                 <Card
                     style={{ cursor: "pointer" }}>
-                    <Card.Img variant="top" src={product.productImgs} className="image-fluid"/>
+                      <div className='img-detail'>
+                    <Card.Img variant="top" src={product.productImgs} className="img-fluid"/>
+                    </div>
                     <Card.Body>
                       <Card.Title>{product.title}</Card.Title>
                       <Card.Text>{product.description}</Card.Text>
@@ -61,6 +62,7 @@ const ProductsDetail = () => {
                       <Button onClick={addProduct}>Add to Cart</Button>
                     </Card.Body>
                   </Card>
+            </div>
 
             
             <h2>Discover similar items</h2>
@@ -73,10 +75,10 @@ const ProductsDetail = () => {
                     style={{ cursor: "pointer" }}
                     onClick={() => navigate(`/products/${productsItem.id}`)}
                     >
-                    <Card.Img variant="top" src={productsItem.productImgs} width="10px" />
+                    <Card.Img variant="top" src={productsItem.productImgs} className="home-images"/>
                     <Card.Body>
                       <Card.Title>{productsItem.title}</Card.Title>
-                      <Card.Text>wefwegwe</Card.Text>
+                      <Card.Text>${productsItem.price}</Card.Text>
                     </Card.Body>
                   </Card>
                 </Col>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getCart } from "../store/slices/cart.slice";

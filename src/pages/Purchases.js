@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
+import { Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getPurchases } from "../store/slices/purchases.slice";
+import "../styles/purchases.css";
 
 const Purchases = () => {
   const options = {
@@ -19,35 +21,46 @@ const Purchases = () => {
   }, [dispatch]);
 
   return (
-    <div>
-      <h1>Purchases</h1>
+    <div className="div" >
+      <p className="title">My Purchases</p>
 
-      <ul>
-        {purchases.map((purchase) => (
-          <div key={purchase.id}>
-            <h4>
-              Created:{" "}
-              {new Date(purchase.createdAt).toLocaleDateString(
-                "en-us",
-                options
-              )}
-            </h4>
-
-            {purchase.cart.products.map((product) => (
-              <li
-                key={product.id}
-                onClick={() => navigate(`/products/${product.id}`)}
-              >
-                {product.title}
-                <div key={product.id}>
-                  Quantity: {product.productsInCart.quantity}
-                  Price: $ {product.price}
-                </div>
-              </li>
+      <div className="container">
+        <Card.Body>
+          <Card className="card-one">
+            {purchases.map((purchase) => (
+              <div key={purchase.id}>
+                <Card>
+                  <h4 className="date">
+                  {" "}
+                  {new Date(purchase.createdAt).toLocaleDateString(
+                    "en-us",
+                    options
+                  )}
+                  </h4>
+                </Card>
+                {purchase.cart.products.map((product) => (
+                  <Card
+                    key={product.id}
+                    onClick={() => navigate(`/products/${product.id}`)}
+                  >
+                    {product.title}
+                    <div className="purchases" key={product.id}>
+                      <div className="quantity-container">
+                        <div className="quantity">
+                      {product.productsInCart.quantity}
+                      </div>
+                      </div>
+                      <div>
+                      Price: $ {product.price}
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
             ))}
-          </div>
-        ))}
-      </ul>
+          </Card>
+        </Card.Body>
+      </div>
     </div>
   );
 };

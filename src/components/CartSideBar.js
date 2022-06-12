@@ -35,8 +35,8 @@ const CartSideBar = ({ show, handleClose }) => {
           <ListGroup>
             {cartItems.map((cartItem) => (
               <ListGroup.Item onClick={() => selectCartItem(cartItem)}key={cartItem.id}>
-                <h2>{cartItem.title}</h2>
-                <h3>Quantity: {cartItem.quantity}</h3>
+                <h4>{cartItem.title}</h4>
+                <p>Quantity: {cartItem.quantity}</p>
                </ListGroup.Item>
 
             ))}
