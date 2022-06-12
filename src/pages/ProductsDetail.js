@@ -79,6 +79,7 @@ const ProductsDetail = () => {
                     <Card.Body>
                       <Card.Title>{productsItem.title}</Card.Title>
                       <Card.Text>${productsItem.price}</Card.Text>
+                      <Card.Text>{productsItem.brand}</Card.Text>
                     </Card.Body>
                   </Card>
                 </Col>
