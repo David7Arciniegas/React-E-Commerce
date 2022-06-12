@@ -29,7 +29,7 @@ export const addToCart = (item) => (dispatch) => {
     dispatch(setIsLoading(true));
     return axios.post("https://ecommerce-api-react.herokuapp.com/api/v1/cart", item, getConfig())
         .then(() => {
-            dispatch(getProducts());
+            dispatch(getCart());
             alert("Product added to cart!")
             })
         .catch((error) => {dispatch(getProducts());alert(error.response.data.message)})
